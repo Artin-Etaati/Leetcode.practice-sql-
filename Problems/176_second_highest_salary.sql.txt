@@ -1,0 +1,20 @@
+SET search_path TO lc176;
+
+DROP TABLE IF EXISTS lc176.Employee;
+
+CREATE TABLE lc176.Employee (
+    Id     INT,
+    Salary INT
+);
+
+INSERT INTO lc176.Employee VALUES
+    (1, 100),
+    (2, 200),
+    (3, 300);
+
+SELECT * FROM lc176.Employee;
+
+-- Solution
+SELECT MAX(Salary) AS SecondHighestSalary
+FROM lc176.Employee
+WHERE Salary < (SELECT MAX(Salary) FROM lc176.Employee);
