@@ -1,0 +1,29 @@
+CREATE SCHEMA IF NOT EXISTS lc196;
+
+DROP TABLE IF EXISTS lc196.Person;
+
+CREATE TABLE lc196.Person (
+    Id    INT,
+    Email VARCHAR(50)
+);
+
+INSERT INTO lc196.Person VALUES
+    (1, 'a@a.com'),
+    (2, 'b@b.com'),
+    (3, 'a@a.com');
+
+
+SELECT * FROM lc196.Person;
+
+
+DELETE FROM lc196.Person
+WHERE Id IN (
+    SELECT p1.Id
+    FROM lc196.Person p1
+    JOIN lc196.Person p2
+    ON p1.Email = p2.Email
+    AND p1.Id > p2.Id
+);
+
+--
+SELECT * FROM lc196.Person;
