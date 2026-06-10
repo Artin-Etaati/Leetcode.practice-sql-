@@ -1,0 +1,28 @@
+drop table if exists lc177.employee
+
+create table lc177.employee(
+	Id int,
+	Salary int
+);
+
+insert into lc177.employee values
+    (1, 100),
+    (2, 2000),
+    (3, 30000);
+
+
+CREATE OR REPLACE FUNCTION lc177.getNthHighestSalary(N INT)
+RETURNS INT AS $$
+BEGIN
+  RETURN (
+    SELECT DISTINCT Salary
+    FROM lc177.Employee
+    ORDER BY Salary DESC
+    LIMIT 1
+    OFFSET N - 1
+  );
+END;
+$$ LANGUAGE plpgsql;
+
+select lc177.getNthHighestSalary(2);
+
