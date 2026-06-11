@@ -1,0 +1,24 @@
+CREATE SCHEMA IF NOT EXISTS lc197;
+
+DROP TABLE IF EXISTS lc197.Weather;
+
+CREATE TABLE lc197.Weather (
+    id          INT,
+    recordDate  DATE,
+    temperature INT
+);
+
+INSERT INTO lc197.Weather VALUES
+    (1, '2015-01-31', 10),
+    (2, '2015-02-01', 25),
+    (3, '2015-02-03', 20),
+    (4, '2015-02-04', 30);
+
+
+SELECT * FROM lc197.Weather;
+
+
+SELECT w1.id
+FROM lc197.Weather w1, lc197.Weather w2
+WHERE w1.temperature > w2.temperature
+AND (w1.recordDate - w2.recordDate) = 1;
