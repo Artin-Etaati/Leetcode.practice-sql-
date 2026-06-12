@@ -1,0 +1,25 @@
+create schema if not exists lc627;
+
+drop table if exists lc627.salary;
+
+create table lc627.salary (
+	id  int primary key,
+	sex  varchar(2)
+);
+
+
+insert into lc627.salary values
+(1,'f'),
+(2,'m'),
+(3,'f');
+
+
+select * from lc627.salary;
+
+update salary
+set sex = case 
+	when sex = 'f' then 'm'
+	when sex = 'm' then 'f'
+end;
+
+select * from lc627.salary
