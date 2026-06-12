@@ -1,0 +1,34 @@
+create schema if not exists lc183;
+
+drop table if exists lc183.orders;
+drop table if exists lc183.customers;
+
+create table lc183.customers (
+    id   int primary key,
+    name varchar(50)
+);
+
+create table lc183.orders (
+    id         int primary key,
+    customerid int
+);
+
+insert into lc183.customers values
+(1, 'joe'),
+(2, 'henry'),
+(3, 'sam'),
+(4, 'max');
+
+insert into lc183.orders values
+(1, 3),
+(2, 1);
+
+select * from lc183.customers;
+select * from lc183.orders;
+
+select name as customers
+from lc183.customers
+where id not in (
+    select customerid
+    from lc183.orders
+);
