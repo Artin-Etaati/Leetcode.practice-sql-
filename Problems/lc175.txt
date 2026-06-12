@@ -1,0 +1,30 @@
+create schema if not exists lc175;
+
+drop table if exists lc175.person;
+drop table if exists lc175.address;
+
+create table lc175.person (
+    personid   int primary key,
+    firstname  varchar(50),
+    lastname   varchar(50)
+);
+
+create table lc175.address (
+    addressid int primary key,
+    personid  int,
+    city      varchar(50),
+    state     varchar(50)
+);
+
+insert into lc175.person values
+(1, 'wang', 'fang'),
+(2, 'alice', 'bob');
+
+insert into lc175.address values
+(1, 2, 'new york city', 'new york');
+
+select * from lc175.person;
+select * from lc175.address;
+
+select firstname, lastname, city, state
+from lc175.person p left join lc175.address a on p.personid = a.personid;
