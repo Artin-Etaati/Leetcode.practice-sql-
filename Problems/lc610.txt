@@ -1,0 +1,22 @@
+create schema if not exists lc610;
+
+drop table if exists lc610.triangle;
+
+create table lc610.triangle (
+    x int,
+    y int,
+    z int
+);
+
+insert into lc610.triangle values
+(13, 15, 30),
+(10, 20, 15);
+
+select * from lc610.triangle;
+
+select x, y, z,
+    case
+        when x + y > z and x + z > y and y + z > x then 'yes'
+        else 'no'
+    end as triangle
+from lc610.triangle;
