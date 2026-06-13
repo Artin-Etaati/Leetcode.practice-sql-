@@ -1,0 +1,18 @@
+create table lc511.activity(
+	player_id int,
+	event_date date,
+	primary key (player_id, event_date)
+);
+
+insert into lc511.activity values
+(1,'2016-03-01'),
+(2,'2016-05-02'),
+(1,'2017-06-25'),
+(2,'2016-03-02');
+
+select * from lc511.activity;
+
+select player_id, min(event_date) as first_login
+from lc511.activity
+group by player_id;
+
