@@ -1,0 +1,20 @@
+create table lc181.employee(
+	id int,
+	name varchar(50),
+	salary int,
+	managerId int
+);
+
+insert into lc181.employee values
+(1,'artin', 7000, 3),
+(2,'tariq', 8000,4),
+(3,'pickle', 6000, null),
+(4,'chocolate', 10000, null);
+
+select * from lc181.employee;
+
+select em.name as employee
+from lc181.employee as em
+inner join lc181.employee as me 
+on em.managerid = me.id
+where em.salary > me.salary;
