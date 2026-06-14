@@ -1,0 +1,19 @@
+create table lc619.mynumbers(
+	num int
+);
+
+
+insert into lc619.mynumbers values
+(1),
+(1),
+(2),
+(3),
+(3);
+
+select max(num) as num
+from( 
+    select num
+    from lc619.mynumbers
+    group by num
+    having count(num) = 1
+) as single
