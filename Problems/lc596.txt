@@ -1,0 +1,25 @@
+create table lc596.courses(
+class varchar(50)
+);
+
+insert into lc596.courses values
+('math'),
+('science'),
+('art'),
+('math'),
+('math'),
+('cooking'),
+('pickleball'),
+('math'),
+('math'),
+('apple'),
+('math');
+
+
+select class as class
+from (
+    select class
+    from lc596.courses
+    group by class
+    having count(class) >= 5
+) as class
