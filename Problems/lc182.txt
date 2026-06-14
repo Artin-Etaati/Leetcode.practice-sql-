@@ -1,0 +1,20 @@
+create schema if not exists lc182;
+
+drop table if exists lc182.person;
+
+create table lc182.person (
+    id    int primary key,
+    email varchar(50)
+);
+
+insert into lc182.person values
+(1, 'a@b.com'),
+(2, 'c@d.com'),
+(3, 'a@b.com');
+
+select * from lc182.person;
+
+select email
+from lc182.person
+group by email
+having count(email) > 1;
