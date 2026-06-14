@@ -1,4 +1,4 @@
-SET search_path TO lc176;
+
 
 DROP TABLE IF EXISTS lc176.Employee;
 
