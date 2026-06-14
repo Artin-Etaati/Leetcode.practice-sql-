@@ -1,0 +1,24 @@
+schema if not exists lc1148;
+
+drop table if exists lc1148.views;
+
+
+create table lc1148.views (
+	author_id int,
+	viewer_id int
+);
+
+insert into lc1148.views values
+(1,2),
+(2,1),
+(2,2),
+(2,2),
+(3,1),
+(3,3);
+
+select * from lc1148.views;
+
+select distinct author_id as id
+from lc1148.views
+where author_id = viewer_id
+order by id asc;
