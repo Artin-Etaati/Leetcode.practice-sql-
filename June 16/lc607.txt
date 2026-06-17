@@ -1,0 +1,52 @@
+create schema if not exists lc607;
+
+drop table if exists lc607.orders;
+drop table if exists lc607.company;
+drop table if exists lc607.salesperson;
+
+create table lc607.salesperson (
+    sales_id int primary key,
+    name     varchar(50)
+);
+
+create table lc607.company (
+    com_id int primary key,
+    name   varchar(50)
+);
+
+create table lc607.orders (
+    com_id   int,
+    sales_id int
+);
+
+insert into lc607.salesperson values
+(1, 'john'),
+(2, 'amy'),
+(3, 'mark'),
+(4, 'pam'),
+(5, 'alex');
+
+insert into lc607.company values
+(1, 'red'),
+(2, 'orange'),
+(3, 'yellow'),
+(4, 'green');
+
+insert into lc607.orders values
+(3, 4),
+(4, 5),
+(1, 1),
+(1, 4);
+
+select * from lc607.salesperson;
+select * from lc607.company;
+select * from lc607.orders;
+
+select name
+from lc607.salesperson
+where sales_id not in (
+    select sales_id
+    from lc607.orders
+    join lc607.company on lc607.orders.com_id = lc607.company.com_id
+    where lc607.company.name = 'red'
+);
