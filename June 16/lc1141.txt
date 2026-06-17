@@ -1,0 +1,28 @@
+create schema if not exists lc1141;
+
+drop table if exists lc1141.activity;
+
+create table lc1141.activity (
+    user_id       int,
+    activity_date date
+);
+
+insert into lc1141.activity values
+(1, '2019-07-20'),
+(1, '2019-07-20'),
+(1, '2019-07-20'),
+(2, '2019-07-20'),
+(2, '2019-07-21'),
+(2, '2019-07-21'),
+(3, '2019-07-21'),
+(3, '2019-07-21'),
+(3, '2019-07-21'),
+(4, '2019-06-25'),
+(4, '2019-06-25');
+
+select * from lc1141.activity;
+
+select activity_date as day, count(distinct user_id) as active_users
+from lc1141.activity
+where activity_date between '2019-06-28' and '2019-07-27'
+group by activity_date;
