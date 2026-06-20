@@ -1,0 +1,26 @@
+create schema if not exists lc1211;
+
+drop table if exists lc1211.queries;
+
+create table lc1211.queries (
+    query_name varchar(50),
+    result     varchar(50),
+    position   int,
+    rating     int
+);
+
+insert into lc1211.queries values
+('dog', 'golden retriever', 1, 5),
+('dog', 'german shepherd', 2, 5),
+('dog', 'mule', 200, 1),
+('cat', 'shirazi', 5, 2),
+('cat', 'siamese', 3, 3),
+('cat', 'sphynx', 7, 4);
+
+select * from lc1211.queries;
+
+select query_name, 
+    round(avg(rating / position), 2) as quality,
+    round(avg(case when rating < 3 then 1 else 0 end) * 100, 2) as poor_query_percentage
+from lc1211.queries
+group by query_name;
