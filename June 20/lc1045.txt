@@ -1,0 +1,34 @@
+create schema if not exists lc1045;
+
+drop table if exists lc1045.customer;
+drop table if exists lc1045.product;
+
+create table lc1045.customer (
+    customer_id int,
+    product_key int
+);
+
+create table lc1045.product (
+    product_key int primary key
+);
+
+insert into lc1045.customer values
+(1, 5),
+(2, 6),
+(3, 5),
+(3, 6),
+(1, 6);
+
+insert into lc1045.product values
+(5),
+(6);
+
+select * from lc1045.customer;
+select * from lc1045.product;
+
+select customer_id
+from lc1045.customer
+group by customer_id
+having count(distinct product_key) = (
+    select count(*) from lc1045.product
+);
