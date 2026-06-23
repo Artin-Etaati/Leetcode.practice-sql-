@@ -1,0 +1,34 @@
+create schema if not exists lc1084;
+
+drop table if exists lc1084.sales;
+drop table if exists lc1084.product;
+
+create table lc1084.product (
+    product_id   int primary key,
+    product_name varchar(50)
+);
+
+create table lc1084.sales (
+    product_id int,
+    sale_date  date
+);
+
+insert into lc1084.product values
+(1, 's8'),
+(2, 'g4'),
+(3, 'iphone');
+
+insert into lc1084.sales values
+(1, '2019-01-21'),
+(2, '2019-02-17'),
+(2, '2019-06-02'),
+(3, '2019-05-13');
+
+select * from lc1084.product;
+select * from lc1084.sales;
+
+select product_id, product_name
+from lc1084.sales
+inner join lc1084.product using(product_id)
+group by product_id, product_name
+having sum(case when sale_date between '2019-01-01' and '2019-03-31' then 1 else 0 end) = count(*);
