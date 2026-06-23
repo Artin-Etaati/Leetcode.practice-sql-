@@ -1,0 +1,36 @@
+create schema if not exists lc1075;
+
+drop table if exists lc1075.project;
+drop table if exists lc1075.employee;
+
+create table lc1075.project (
+    project_id  int,
+    employee_id int
+);
+
+create table lc1075.employee (
+    employee_id       int primary key,
+    name              varchar(50),
+    experience_years  int
+);
+
+insert into lc1075.employee values
+(1, 'ben johns', 3),
+(2, 'anna leigh waters', 2),
+(3, 'tyson mcguffin', 1),
+(4, 'catherine parenteau', 2);
+
+insert into lc1075.project values
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 1),
+(2, 4);
+
+select * from lc1075.project;
+select * from lc1075.employee;
+
+select project_id, round(avg(experience_years), 2) as average_years
+from lc1075.project p
+left join lc1075.employee e on p.employee_id = e.employee_id
+group by project_id;
