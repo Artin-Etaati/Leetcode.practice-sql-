@@ -1,0 +1,50 @@
+create schema if not exists lc1327;
+
+drop table if exists lc1327.orders;
+drop table if exists lc1327.products;
+
+create table lc1327.products (
+    product_id   int primary key,
+    product_name varchar(50)
+);
+
+create table lc1327.orders (
+    product_id int,
+    order_date date,
+    unit       int
+);
+
+insert into lc1327.products values
+(1, 'paddle - selkirk'),
+(2, 'paddle - joola'),
+(3, 'pickleball net'),
+(4, 'court shoes'),
+(5, 'pickleball balls');
+
+insert into lc1327.orders values
+(1, '2020-02-05', 60),
+(1, '2020-02-10', 70),
+(2, '2020-01-18', 30),
+(2, '2020-02-11', 80),
+(3, '2020-02-17', 2),
+(3, '2020-02-24', 3),
+(4, '2020-03-01', 20),
+(4, '2020-03-04', 30),
+(4, '2020-03-04', 60),
+(5, '2020-02-25', 50),
+(5, '2020-02-27', 50),
+(5, '2020-03-01', 50);
+
+select * from lc1327.products;
+select * from lc1327.orders;
+
+select product_name, sum(unit) as unit
+from (
+    select product_name, unit
+    from lc1327.products p
+    join lc1327.orders o
+    on p.product_id = o.product_id
+    where order_date between '2020-02-01' and '2020-02-28'
+) as t
+group by product_name
+having sum(unit) >= 100;
