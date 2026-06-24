@@ -1,0 +1,28 @@
+create schema if not exists lc1193;
+
+drop table if exists lc1193.transactions;
+
+create table lc1193.transactions (
+    id         int primary key,
+    country    varchar(50),
+    state      varchar(50),
+    amount     int,
+    trans_date date
+);
+
+insert into lc1193.transactions values
+(121, 'us', 'approved', 1000, '2018-12-18'),
+(122, 'us', 'declined', 2000, '2018-12-19'),
+(123, 'us', 'approved', 2000, '2019-01-01'),
+(124, 'dz', 'approved', 100,  '2018-12-19');
+
+select * from lc1193.transactions;
+
+select to_char(trans_date, 'yyyy-mm') as month,
+    country,
+    count(*) as trans_count,
+    sum(case when state = 'approved' then 1 else 0 end) as approved_count,
+    sum(amount) as trans_total_amount,
+    sum(case when state = 'approved' then amount else 0 end) as approved_total_amount
+from lc1193.transactions
+group by month, country;
