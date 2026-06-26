@@ -1,0 +1,30 @@
+create schema if not exists lc626;
+
+drop table if exists lc626.seat;
+
+create table lc626.seat (
+    id   int primary key,
+    student varchar(50)
+);
+
+insert into lc626.seat values
+(1, 'ben johns'),
+(2, 'anna leigh waters'),
+(3, 'tyson mcguffin'),
+(4, 'catherine parenteau'),
+(5, 'collin johns'),
+(6, 'riley newman'),
+(7, 'lucy kovalova'),
+(8, 'irina tereschenko');
+
+select * from lc626.seat;
+
+select 
+    case
+        when id % 2 = 1 and id = (select count(*) from lc626.seat) then id
+        when id % 2 = 1 then id + 1
+        else id - 1
+    end as id,
+    student
+from lc626.seat
+order by id;
